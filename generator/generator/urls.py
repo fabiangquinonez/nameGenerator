@@ -19,5 +19,6 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include ('main.urls')) #prefix is nothing, we want all URLS from main.urls with that prefix
+    path('', include ('main.urls')), #prefix is nothing, we want all URLS from main.urls with that prefix
+    path('', include ('django.contrib.auth.urls')),
 ]

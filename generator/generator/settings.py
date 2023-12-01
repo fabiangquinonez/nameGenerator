@@ -42,6 +42,10 @@ INSTALLED_APPS = [
     'crispy_bootstrap5'
 ]
 
+CRISPY_ALLOWED_TEMPLATES_PACKS = "bootstrap5"
+
+CRISPY_TEMPLATE_PACK = "bootstrap5"
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -78,8 +82,12 @@ WSGI_APPLICATION = 'generator.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'd7hllgss4dbnad',
+        'USER': 'uc7ng01d2cr8ba',
+        'PASSWORD': 'p90851c933984b5f31f279651e94e80133cf7b8353d2fc1cdc733fc238c1fa0ed',
+        'HOST': 'ec2-107-23-234-237.compute-1.amazonaws.com',
+        'PORT': '5432'
     }
 }
 
@@ -124,3 +132,6 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGIN_REDIRECT_URL = '/home'
+LOGOUT_REDIRECT_URL = '/login'

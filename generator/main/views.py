@@ -35,6 +35,10 @@ def create_post(request):
 
     return render(request, 'main/create_post.html', {"form" : form})
 
+@login_required(login_url = "/login")
+def profile(request):
+    return render(request, 'main/profile.html')
+
 def register(request):
     if request.method == 'POST':
         form = RegisterForm(request.POST)

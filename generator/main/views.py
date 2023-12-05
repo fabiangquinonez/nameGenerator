@@ -7,6 +7,11 @@ from .models import Post
 # Create your views here.
 
 def home(request):
+    
+
+    return render(request, 'main/home.html')
+
+def feed(request):
     posts = Post.objects.all()
     if request.method == "POST":
         post_id = request.POST.get("post-id")
@@ -14,7 +19,7 @@ def home(request):
         if post and post.author == request.user:
             post.delete()
 
-    return render(request, 'main/home.html', {"posts": posts})
+    return render(request, 'main/feed.html', {"posts": posts})
 
 @login_required(login_url = "/login")
 def create_post(request):

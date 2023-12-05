@@ -6,7 +6,7 @@
     <div class = "class-header"><strong>@{{post.author.username}}</strong></div>
     <div class = "card-body d-flex flex-row justify-content-between">
         <div>
-            <h5 class = "card-title"> {{post.title}} </h5>
+            <h5 class = "card-title"> {{post.generated_name}} </h5>
             <p>{{post.description}}</p>
         </div>
         {% if user == post.author%}

@@ -7,7 +7,9 @@ from .models import Post
 # Create your views here.
 
 def home(request):
-    
+    if request.method == 'POST':
+        generated_name = request.POST.get('generated_name')
+        request.session['generated_name'] = generated_name  # Store in session
 
     return render(request, 'main/home.html')
 
@@ -31,7 +33,8 @@ def create_post(request):
             post.save()
             return redirect("/home")
     else:
-        form = PostForm()
+        generated_name = request.GET.get('generated_name', '')
+        form = PostForm(initial = {'generated_name': generated_name})
 
     return render(request, 'main/create_post.html', {"form" : form})
 

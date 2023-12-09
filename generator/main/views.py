@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
-from .forms import RegisterForm, PostForm
+from .forms import RegisterForm, PostForm, SavedForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
-from .models import Post
+from .models import Post, SavedName
 
 # Create your views here.
 
@@ -13,6 +13,7 @@ def home(request):
 
     return render(request, 'main/home.html')
 
+#displays all post objects' fields in the shape of cards
 def feed(request):
     posts = Post.objects.all()
     if request.method == "POST":
@@ -23,6 +24,8 @@ def feed(request):
 
     return render(request, 'main/feed.html', {"posts": posts})
 
+
+#requires user to be logged in, recieves the generated name selected when "post" button is pressed and sets default value of generated_name field to that name
 @login_required(login_url = "/login")
 def create_post(request):
     if request.method == 'POST':
@@ -31,17 +34,17 @@ def create_post(request):
             post = form.save(commit = False)
             post.author = request.user
             post.save()
-            return redirect("/home")
+            return redirect("/feed")
     else:
         generated_name = request.GET.get('generated_name', '')
         form = PostForm(initial = {'generated_name': generated_name})
-
     return render(request, 'main/create_post.html', {"form" : form})
 
 @login_required(login_url = "/login")
 def profile(request):
     return render(request, 'main/profile.html')
 
+#saves data from reigster form in order to store newly created login credentials
 def register(request):
     if request.method == 'POST':
         form = RegisterForm(request.POST)
